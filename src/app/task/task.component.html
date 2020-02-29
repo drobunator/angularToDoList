@@ -1,0 +1,52 @@
+<li class="task" [ngClass]="{
+task_one: importantValue === 1,
+task_two: importantValue === 2,
+task_three: importantValue === 3,
+task_four: importantValue === 4,
+task_fife: importantValue === 5,
+task_inactive: checkboxValue
+}">
+
+  <label class="task__checkbox">
+    <input type="checkbox" class="checkbox" (click)="onCheck($event)" [checked]="check">
+    <span class="check-span"></span>
+  </label>
+
+  <p class="task__text">{{task.text}}</p>
+  <p class="task__date">{{task.date | date: 'HH:mm:ss, dd.MM.yyyy'}}</p>
+
+
+  <div class="important-block" [ngClass]="{'important-block_active': taskImportantActive}">
+    <p class="important-block___value"> {{ importantValue }} </p>
+    <div class="important-block__buttons">
+      <button class="btn-important_close" (click)="taskImportantActive = !taskImportantActive"></button>
+      <button class="btn-important" (click)="importantValuePlus()">+</button>
+      <button class="btn-important" (click)="importantValueMinus()">-</button>
+    </div>
+  </div>
+
+
+  <div class="edit-form" [ngClass]="{
+  'edit-form_active': taskEditActive === true
+  }">
+    <label>
+      <textarea maxlength="150" class="edit-form__text" (keyup.enter)="editTask()" [(ngModel)]="editFormValue"></textarea>
+    </label>
+    <div class="edit-form__buttons">
+      <button class="btn btn-edit" (click)="cancelEditTask()">Cancel</button>
+      <button class="btn btn-edit" (click)="editTask()">Edit</button>
+    </div>
+  </div>
+
+
+  <div class="button-burger" (click)="buttonsTaskActive = !buttonsTaskActive">
+    <div class="buttons" [ngClass]="{
+    buttons_active: buttonsTaskActive === true
+    }">
+      <button class="btn-task btn-task_edit" *ngIf="checkedInactive" (click)="taskEditActive = true"></button>
+      <button class="btn-task btn-task_important" *ngIf="checkedInactive"
+              (click)="taskImportantActive = !taskImportantActive"></button>
+      <button class="btn-task btn-task_delete" (click)="taskDelete()"></button>
+    </div>
+  </div>
+</li>

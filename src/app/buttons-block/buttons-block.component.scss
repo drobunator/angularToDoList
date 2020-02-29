@@ -1,0 +1,21 @@
+.sort-buttons {
+  width: 100%;
+
+  .wrapp {
+    display: flex;
+    justify-content: center;
+  }
+  .sort-btn{
+    padding: 10px;
+    margin: 10px 5px;
+    font-size: 13px;
+    word-wrap: break-word;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .8);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-style: italic;
+    font-weight: 600;
+  }
+}

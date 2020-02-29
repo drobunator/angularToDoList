@@ -1,0 +1,294 @@
+.task {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .8);
+
+  &_inactive {
+    box-shadow: none;
+    background-color: rgba(117, 109, 109, 0.747) !important;
+    text-decoration: line-through;
+    color: aliceblue;
+  }
+
+  &__text {
+    width: 70%;
+    padding-left: 10px;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 14px;
+    word-wrap: break-word;
+  }
+
+
+  &__date {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    font-style: italic;
+    font-weight: 900;
+    padding-right: 30px;
+
+  }
+
+  &_fife {
+    background-color: rgba(240, 0, 0, 0.8);
+  }
+
+  &_four {
+    background-color: rgba(233, 136, 24, 0.596);
+  }
+
+  &_three {
+    background-color: rgba(233, 212, 24, 0.514);
+  }
+
+  &_two {
+    background-color: rgba(30, 136, 4, 0.822);
+  }
+
+  &_one {
+    background-color: rgba(22, 54, 236, 0.589);
+  }
+}
+
+
+.checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: absolute;
+}
+
+.check-span {
+  width: 20px;
+  height: 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .55) inset;
+  background-color: #6dc0c8;
+  border-radius: 50%;
+  position: absolute;
+  top: calc(50% - 10px);
+
+  &::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background: rgba(117, 109, 109, 0.747) url('https://github.com/drobunator/toDoListTest/blob/master/img/checkbox-checked.png?raw=true') no-repeat;
+    position: absolute;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    opacity: 0;
+  }
+}
+
+.checkbox:checked + .check-span {
+  box-shadow: none;
+  background-color: rgba(117, 109, 109, 0.747);
+}
+
+.checkbox:checked + .check-span::before {
+  opacity: 1;
+}
+
+
+.important-block {
+  margin-right: 20px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  z-index: 0;
+  position: absolute;
+  right: -93px;
+  transform: scale(0);
+  transition: linear .3s;
+
+  &_active {
+    transform: scale(1);
+    transition: linear .5s;
+  }
+
+  &___value {
+    width: 40px;
+    height: 35px;
+    padding: 5px;
+    margin-right: 6px;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .25) inset;
+    background: rgba(255, 255, 255, .5);
+    outline: none;
+    text-align: center;
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+
+    .btn-important {
+      width: 20px;
+      height: 16px;
+      border: none;
+      border-radius: 3px;
+      margin-bottom: 3px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .5);
+      outline: none;
+      cursor: pointer;
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    .btn-important_close {
+      width: 17px;
+      height: 17px;
+      background: url('https://github.com/drobunator/toDoListTest/blob/master/img/close-button.png?raw=true') no-repeat;
+      border-radius: 50%;
+      border: none;
+      outline: none;
+      position: absolute;
+      top: -22px;
+      right: 18px;
+      transition: all linear .5s;
+
+      &:hover {
+        transform: scale(1.1);
+        background-color: rgba(255, 0, 0, 1);
+        transition: all linear .5s;
+      }
+
+    }
+  }
+
+}
+
+
+.button-burger {
+  width: 24px;
+  height: 24px;
+  background: url('https://github.com/drobunator/toDoListTest/blob/master/img/chose-button.png?raw=true') no-repeat;
+  cursor: pointer;
+  position: relative;
+  top: 3px;
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 70px;
+    bottom: -50px;
+    transform: scale(0) translateX(0);
+    transition: all linear .4s;
+
+    &_active {
+      transform: scale(1) translateX(-10px);
+      transition: all linear .7s;
+    }
+
+    .btn-task {
+      display: block;
+      width: 30px;
+      height: 30px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 50%;
+      outline: 0;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .25);
+
+      &:hover {
+        transform: scale(1.1);
+        transition: all linear .4s;
+      }
+
+      &_edit {
+        background: url('https://github.com/drobunator/toDoListTest/blob/master/img/edit-icon.png?raw=true') no-repeat center;
+
+        &:hover {
+          background-color: rgb(131, 224, 255);
+        }
+      }
+
+      &_important {
+        background: url('https://github.com/drobunator/toDoListTest/blob/master/img/icon-!.png?raw=true') no-repeat center;
+
+        &:hover {
+
+          background-color: rgb(255, 255, 0);
+        }
+      }
+
+      &_delete {
+        background: url('https://github.com/drobunator/toDoListTest/blob/master/img/delet-icon.png?raw=true') no-repeat center;
+
+        &:hover {
+          background-color: rgba(255, 0, 0, 1);
+        }
+      }
+    }
+  }
+
+}
+
+
+.edit-form {
+  position: absolute;
+  top: 0;
+  right: -350px;
+  transform: scale(0);
+
+  &_active {
+    transform: scale(1);
+    transition: linear all .4s;
+  }
+
+  &__text {
+    width: 250px;
+    height: 75px;
+    font-family: 'Exo 2', sans-serif;
+    font-style: italic;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    padding: 15px;
+    background: rgba(255, 255, 255, .5);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .25) inset;
+    outline: none;
+
+    &_inactive {
+      transform: scale(0);
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+
+    .btn-edit {
+      width: 50px;
+      height: 25px;
+      margin-left: 10px;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
