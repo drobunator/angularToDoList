@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Task} from "./header/header.component";
-import {HttpClient} from "@angular/common/http";
-import {map, subscribeOn} from "rxjs/operators";
-import {pipe} from "rxjs";
+import {delay} from "rxjs/operators";
+import {DataService} from "./services/data.service";
 
 @Component({
   selector: 'app-root',
@@ -18,41 +17,26 @@ export class AppComponent implements OnInit {
   searchInputValue = '';
   sortValue: string;
   sortKey: string;
-  tasks = [];
+  tasks: Task [] = [];
   emptyTitle = 'todo list is empty';
-  url = 'https://angulartodolist-e91cf.firebaseio.com/tasks';
 
-  constructor(private http: HttpClient) {
+
+  constructor(private data: DataService) {
   }
 
 
   ngOnInit(): void {
-    this.http.get(`${this.url}.json`)
-      .pipe(map(response => {
-        if (!response) return;
-        return Object
-          .keys(response)
-          .map(key => ({
-            ...response[key],
-            id: key
-          }))
-      }))
+    this.data.getData()
       .subscribe(resp => {
-        if (!resp) return
+        if (!resp) return;
         this.tasks = resp.reverse()
       });
   }
 
   pushTask(task) {
-    this.http.post(`${this.url}.json`, task)
-      .pipe(map(resp => {
-        return {
-          ...task,
-          id: resp['name'],
-        }
-      }))
-      .subscribe(task => this.tasks.unshift(task));
+    this.data.postTask(task)
 
+      .subscribe(task => this.tasks.unshift(task));
   }
 
   deleteTask({index, id}) {
@@ -63,24 +47,25 @@ export class AppComponent implements OnInit {
   }
 
   editTask({index, text, id}) {
-    this.http.put(`${this.url}/${id}/text.json`,JSON.stringify(text))
+   this.data.putEditTask(text,id)
       .subscribe(resp => this.tasks[index].text = resp);
   }
 
   changeImportantTask({index, value, id}) {
-    this.http.put(`${this.url}/${id}/important.json`,JSON.stringify(value))
-      .subscribe(resp => this.tasks[index].importan = resp);
+    this.data.putImportantTask(value, id)
+      .pipe(delay(5000))
+      .subscribe(resp => this.tasks[index].important = resp);
   }
 
   checkboxTaskChecked({index, value, id}) {
-    this.http.put(`${this.url}/${id}/completed.json`,JSON.stringify(value))
+    this.data.putCheckboxCheck(value,id)
       .subscribe(resp => this.tasks[index].completed = resp);
   }
 
   modalConfirmValue(value: boolean) {
     if (value === true) {
       this.modalConfirmActive = false;
-      this.http.delete(`${this.url}/${this.taskId}.json`)
+      this.data.deleteTask(this.taskId)
         .subscribe(resp => resp);
       this.tasks.splice(this.taskIndex, 1);
     } else {
