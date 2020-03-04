@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Task} from "./header/header.component";
-import {delay} from "rxjs/operators";
-import {DataService} from "./services/data.service";
+import {DataService} from './services/data.service';
+import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -17,26 +16,29 @@ export class AppComponent implements OnInit {
   searchInputValue = '';
   sortValue: string;
   sortKey: string;
-  tasks: Task [] = [];
+  tasks = [];
   emptyTitle = 'todo list is empty';
-
+  loading = false;
 
   constructor(private data: DataService) {
   }
 
 
   ngOnInit(): void {
+    this.loading = true;
     this.data.getData()
       .subscribe(resp => {
-        if (!resp) return;
-        this.tasks = resp.reverse()
+        if (!resp) {
+          return;
+        }
+        this.loading = false;
+        this.tasks = resp.reverse();
       });
   }
 
   pushTask(task) {
     this.data.postTask(task)
-
-      .subscribe(task => this.tasks.unshift(task));
+      .subscribe(resp => this.tasks.unshift(resp));
   }
 
   deleteTask({index, id}) {
@@ -47,18 +49,17 @@ export class AppComponent implements OnInit {
   }
 
   editTask({index, text, id}) {
-   this.data.putEditTask(text,id)
+    this.data.putTask(text, id, 'text')
       .subscribe(resp => this.tasks[index].text = resp);
   }
 
   changeImportantTask({index, value, id}) {
-    this.data.putImportantTask(value, id)
-      .pipe(delay(5000))
+    this.data.putTask(value, id, 'important')
       .subscribe(resp => this.tasks[index].important = resp);
   }
 
   checkboxTaskChecked({index, value, id}) {
-    this.data.putCheckboxCheck(value,id)
+    this.data.putTask(value, id, 'completed')
       .subscribe(resp => this.tasks[index].completed = resp);
   }
 

@@ -10,21 +10,25 @@
 ></app-buttons-block>
 
 <div class="task-container">
-  <ul class="task-container__list" >
-    <div *ngIf="tasks.length; else noTodos">
-      <app-task
-        *ngFor="let task of tasks | searchPipe: searchInputValue | sort: [sortValue, sortKey]; let index = index "
-        [index]="index"
-        [task]="task"
-        (onRemoveTask)="deleteTask($event)"
-        (onEditTask)="editTask($event)"
-        (onChangeImportantTask)='changeImportantTask($event)'
-        (onCheckboxChecked)='checkboxTaskChecked($event)'
-      ></app-task>
+  <ul class="task-container__list">
+    <div *ngIf="loading; else completeLoading">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </div>
-    <ng-template #noTodos>
-      <li class="task-container_empty">{{emptyTitle | titlecase}}</li>
+    <ng-template #completeLoading>
+      <div *ngIf="!tasks.length">
+        <li class="task-container_empty">{{emptyTitle | titlecase}}</li>
+      </div>
     </ng-template>
+
+    <app-task
+      *ngFor="let task of tasks | searchPipe: searchInputValue | sort: [sortValue, sortKey]; let index = index "
+      [index]="index"
+      [task]="task"
+      (onRemoveTask)="deleteTask($event)"
+      (onEditTask)="editTask($event)"
+      (onChangeImportantTask)='changeImportantTask($event)'
+      (onCheckboxChecked)='checkboxTaskChecked($event)'
+    ></app-task>
 
   </ul>
 
