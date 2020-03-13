@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from './services/data.service';
 import {delay} from 'rxjs/operators';
+import {Observable, pipe} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,59 +17,56 @@ export class AppComponent implements OnInit {
   searchInputValue = '';
   sortValue: string;
   sortKey: string;
-  tasks = [];
+  tasks: any[] = [];
   emptyTitle = 'todo list is empty';
   loading = false;
 
-  constructor(private data: DataService) {
+  constructor(public data: DataService) {
   }
 
 
   ngOnInit(): void {
-    this.loading = true;
-    this.data.getData()
+    this.loading = true
+    this.data.tasks
       .subscribe(resp => {
-        if (!resp) {
-          return;
-        }
+        console.log(resp);
+        this.tasks = resp;
         this.loading = false;
-        this.tasks = resp.reverse();
       });
   }
 
   pushTask(task) {
-    this.data.postTask(task)
-      .subscribe(resp => this.tasks.unshift(resp));
+    // this.data.postTask(task)
+    //   .subscribe(resp => this.tasks.unshift(resp));
   }
 
   deleteTask({index, id}) {
     this.modalConfirmActive = true;
     this.taskIndex = index;
     this.taskId = id;
-
   }
 
   editTask({index, text, id}) {
-    this.data.putTask(text, id, 'text')
-      .subscribe(resp => this.tasks[index].text = resp);
+    // this.data.putTask(text, id, 'text')
+    //   .subscribe(resp => this.tasks[index].text = resp);
   }
 
   changeImportantTask({index, value, id}) {
-    this.data.putTask(value, id, 'important')
-      .subscribe(resp => this.tasks[index].important = resp);
+    // this.data.putTask(value, id, 'important')
+    //   .subscribe(resp => this.tasks[index].important = resp);
   }
 
   checkboxTaskChecked({index, value, id}) {
-    this.data.putTask(value, id, 'completed')
-      .subscribe(resp => this.tasks[index].completed = resp);
+    // this.data.putTask(value, id, 'completed')
+    //   .subscribe(resp => this.tasks[index].completed = resp);
   }
 
   modalConfirmValue(value: boolean) {
     if (value === true) {
       this.modalConfirmActive = false;
-      this.data.deleteTask(this.taskId)
-        .subscribe(resp => resp);
-      this.tasks.splice(this.taskIndex, 1);
+      // this.data.deleteTask(this.taskId)
+      //   .subscribe(resp => resp);
+      // this.tasks.splice(this.taskIndex, 1);
     } else {
       this.modalConfirmActive = false;
     }

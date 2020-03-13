@@ -13,7 +13,6 @@ export class SortPipe implements PipeTransform {
 
     if (val === 'min') {
       const newArr = array.sort((a, b) => {
-
         if (typeof a[key] === 'number' || typeof a[key] === 'boolean') {
           return a[key] - b[key];
         } else if (typeof a[key] === 'string') {
