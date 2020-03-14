@@ -1,0 +1,28 @@
+<app-modal-confirm
+  *ngIf="confirm.activeConfirm"
+></app-modal-confirm>
+<app-modal-alert
+  *ngIf="modalAlertClose"
+  (onCloseAlert)="modalAlertClose = $event"
+></app-modal-alert>
+<app-header
+  (emptyAddTaskInput)="modalAlertClose = $event"
+  (onSearchInput)="searchInputValue = $event"
+>
+</app-header>
+<app-buttons-block
+  (onSortBtn)="sortValue = $event.value; sortKey = $event.key"
+></app-buttons-block>
+
+<div class="task-container">
+  <ul class="task-container__list">
+    <app-task
+      *ngFor="let task of tasks | searchPipe: searchInputValue | sort: [sortValue, sortKey]; let index = index "
+      [index]="index"
+      [task]="task"></app-task>
+    <div *ngIf="!tasks.length">
+      <li class="task-container_empty">{{emptyTitle | titlecase}}</li>
+    </div>
+  </ul>
+
+</div>

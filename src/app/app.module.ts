@@ -16,9 +16,14 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
-import {AngularFireAuth, AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
-import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {SharedModule} from './shared/shared.module';
+import {AuthModule} from './auth/auth.module';
+import {CommonModule} from '@angular/common';
+import {RouterModule} from '@angular/router';
+import { MainPageComponent } from './main-page/main-page.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +35,7 @@ import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore'
     ModalAlertComponent,
     SearchPipePipe,
     SortPipe,
-
-
+    MainPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,11 @@ import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore'
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    SharedModule,
+    AuthModule,
+    CommonModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
