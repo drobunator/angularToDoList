@@ -1,9 +1,9 @@
 <div class="wrap">
   <div class="modal-confirm">
-    <p class="modal-confirm__text">{{title}}</p>
+    <p class="modal-confirm__text">{{confirm.title}}</p>
     <div class="modal-confirm__buttons">
-      <button class="confirm-btn" (click)="confirmModalValue(false)">No</button>
-      <button class="confirm-btn" (click)="confirmModalValue(true)">Yes</button>
+      <button class="confirm-btn" (click)="confirm.delete(false)">No</button>
+      <button class="confirm-btn" (click)="confirm.delete(true)">Yes</button>
     </div>
   </div>
 </div>

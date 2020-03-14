@@ -16,21 +16,20 @@ task_inactive: checkboxValue
   <p class="task__date">{{task.date | date: 'HH:mm:ss, dd.MM.yyyy'}}</p>
 
 
-  <div class="important-block" [ngClass]="{'important-block_active': taskImportantActive}">
+  <div class="important-block" [ngClass]="{'important-block_active': counterActive}">
     <p class="important-block___value"> {{ importantValue }} </p>
     <div class="important-block__buttons">
-      <button class="btn-important_close" (click)="taskImportantActive = !taskImportantActive"></button>
-      <button class="btn-important" (click)="importantValuePlus()">+</button>
-      <button class="btn-important" (click)="importantValueMinus()">-</button>
+      <button class="btn-important_close" (click)="counterActive = !counterActive"></button>
+      <button class="btn-important" (click)="counterPlus($event); counterActive = true">+</button>
+      <button class="btn-important" (click)="counterMinus($event)">-</button>
     </div>
   </div>
 
 
-  <div class="edit-form" [ngClass]="{
-  'edit-form_active': taskEditActive === true
-  }">
+  <div class="edit-form" [ngClass]="{ 'edit-form_active': taskEditActive === true }">
     <label>
-      <textarea maxlength="150" class="edit-form__text" (keyup.enter)="editTask()" [(ngModel)]="editFormValue"></textarea>
+      <textarea maxlength="150" class="edit-form__text" (keyup.enter)="editTask()"
+                [(ngModel)]="editFormValue"></textarea>
     </label>
     <div class="edit-form__buttons">
       <button class="btn btn-edit" (click)="cancelEditTask()">Cancel</button>
@@ -39,14 +38,21 @@ task_inactive: checkboxValue
   </div>
 
 
-  <div class="button-burger" (click)="buttonsTaskActive = !buttonsTaskActive">
-    <div class="buttons" [ngClass]="{
-    buttons_active: buttonsTaskActive === true
-    }">
-      <button class="btn-task btn-task_edit" *ngIf="checkedInactive" (click)="taskEditActive = true"></button>
-      <button class="btn-task btn-task_important" *ngIf="checkedInactive"
-              (click)="taskImportantActive = !taskImportantActive"></button>
-      <button class="btn-task btn-task_delete" (click)="taskDelete()"></button>
+  <div class="button-burger"
+       (click)="buttonsTaskActive = !buttonsTaskActive">
+    <div class="buttons" [ngClass]="{ buttons_active: buttonsTaskActive }">
+      <div *ngIf="!check">
+        <button class="btn-task btn-task_edit"
+                (click)="taskEditActive = true">
+        </button>
+        <button class="btn-task btn-task_important"
+                (click)="counterActive = !counterActive">
+        </button>
+      </div>
+
+      <button class="btn-task btn-task_delete"
+              (click)="taskDelete()">
+      </button>
     </div>
   </div>
 </li>

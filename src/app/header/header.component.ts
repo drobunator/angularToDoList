@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ApiService} from '../services/api.service';
 
 export interface Task {
   id?: any;
@@ -24,9 +25,10 @@ export class HeaderComponent implements OnInit {
 
   @Output() addNewTask: EventEmitter<Task> = new EventEmitter<Task>();
   @Output() emptyAddTaskInput: EventEmitter<any> = new EventEmitter<any>();
+  // tslint:disable-next-line:no-output-on-prefix
   @Output() onSearchInput: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() {
+  constructor(public api: ApiService) {
   }
 
   ngOnInit(): void {
@@ -52,15 +54,15 @@ export class HeaderComponent implements OnInit {
         completed: false,
         date: Date.now(),
       };
-      this.addNewTask.emit(task);
+      this.api.post(task);
       this.taskText = '';
       this.importantValue = 0;
-    }else{
+    } else {
       this.emptyAddTaskInput.emit(true);
     }
   }
 
-  searchInput(){
+  searchInput() {
     this.onSearchInput.emit(this.searchValue);
   }
 }

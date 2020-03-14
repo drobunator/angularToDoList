@@ -1,8 +1,13 @@
-<app-modal-confirm *ngIf="modalConfirmActive" (onModalConfirmValue)="modalConfirmValue($event)"></app-modal-confirm>
-<app-modal-alert *ngIf="modalAlertClose" (onCloseAlert)="modalAlertClose = $event"></app-modal-alert>
-<app-header (addNewTask)="pushTask($event)"
-            (emptyAddTaskInput)="modalAlertClose = $event"
-            (onSearchInput)="searchInputValue = $event"
+<app-modal-confirm
+  *ngIf="confirm.activeConfirm"
+></app-modal-confirm>
+<app-modal-alert
+  *ngIf="modalAlertClose"
+  (onCloseAlert)="modalAlertClose = $event"
+></app-modal-alert>
+<app-header
+  (emptyAddTaskInput)="modalAlertClose = $event"
+  (onSearchInput)="searchInputValue = $event"
 >
 </app-header>
 <app-buttons-block
@@ -20,12 +25,8 @@
         *ngFor="let task of tasks | searchPipe: searchInputValue | sort: [sortValue, sortKey]; let index = index "
         [index]="index"
         [task]="task"
-        (onRemoveTask)="deleteTask($event)"
-        (onEditTask)="editTask($event)"
-        (onChangeImportantTask)='changeImportantTask($event)'
-        (onCheckboxChecked)='checkboxTaskChecked($event)'
       ></app-task>
-      
+
       <div *ngIf="!tasks.length">
         <li class="task-container_empty">{{emptyTitle | titlecase}}</li>
       </div>

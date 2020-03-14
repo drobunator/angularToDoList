@@ -1,85 +1,97 @@
-  import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-  import {Task} from "../header/header.component";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Task} from '../header/header.component';
+import {DataService} from '../services/data.service';
+import {ApiService} from '../services/api.service';
+import {ConfirmService} from '../services/confirm.service';
 
-  @Component({
-    selector: 'app-task',
-    templateUrl: './task.component.html',
-    styleUrls: ['./task.component.scss']
-  })
-  export class TaskComponent implements OnInit {
-    @Input() task: Task;
-    @Input() index: number;
-    @Output() onRemoveTask: EventEmitter<any> = new EventEmitter<any>();
-    @Output() onEditTask: EventEmitter<any> = new EventEmitter<any>();
-    @Output() onChangeImportantTask: EventEmitter<any> = new EventEmitter<any>();
-    @Output() onCheckboxChecked: EventEmitter<any> = new EventEmitter<any>();
+@Component({
+  selector: 'app-task',
+  templateUrl: './task.component.html',
+  styleUrls: ['./task.component.scss']
+})
+export class TaskComponent implements OnInit {
+  @Input() task: Task;
+  @Input() index: number;
+
+  taskEditActive = false;
+  buttonsTaskActive = false;
+  editFormValue: string;
+  counterActive = false;
+  importantValue: number;
+  checkboxValue: boolean;
+  check: boolean;
+
+  constructor(
+    private api: ApiService,
+    private confirm: ConfirmService
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.editFormValue = this.task.text;
+    this.importantValue = this.task.important;
+    this.checkboxValue = this.task.completed;
+    this.check = this.task.completed;
+  }
 
 
-    taskEditActive = false;
-    buttonsTaskActive = false;
-    editFormValue: string;
-    taskImportantActive = false;
-    importantValue: number;
-    checkboxValue: boolean;
-    checkedInactive = true;
-    check: boolean;
+  taskDelete() {
+    this.confirm.stat = true;
+    this.confirm.taskId = this.task.id;
+  }
 
-    constructor() {
-    }
+  editTask() {
+    this.api.update(
+      this.task.id,
+      {text: this.editFormValue}
+    )
+      .then(_ => console.log());
+    this.taskEditActive = false;
+  }
 
-    ngOnInit(): void {
-      this.editFormValue = this.task.text;
-      this.importantValue = this.task.important;
-      this.checkboxValue = this.task.completed;
-      this.check = this.task.completed;
-    }
+  cancelEditTask() {
+    this.taskEditActive = false;
+    this.editFormValue = this.task.text;
+  }
 
-
-    taskDelete() {
-      this.onRemoveTask.emit({
-        index: this.index,
-        id: this.task.id
-      });
-    }
-
-    editTask() {
-      this.onEditTask.emit({
-        index: this.index,
-        text: this.editFormValue,
-        id: this.task.id
-      });
-      this.taskEditActive = false;
-    }
-
-    cancelEditTask() {
-      this.taskEditActive = false;
-      this.editFormValue = this.task.text;
-    }
-
-    importantValuePlus(){
-      if(this.importantValue < 5){
-        this.importantValue++;
-        this.onChangeImportantTask.emit({
-          index: this.index,
-          value: this.importantValue,
-          id: this.task.id
+  counterPlus(event) {
+    this.counterActive = true;
+    if (this.importantValue < 5) {
+      this.importantValue++;
+      this.api.update(
+        this.task.id,
+        {important: this.importantValue}
+      )
+        .then(_ => {
+          this.counterActive = true;
+          console.log('Important changed');
         })
-      }
-    }
-
-    importantValueMinus(){
-      if(this.importantValue > 0){
-        this.importantValue--;
-        this.onChangeImportantTask.emit({index: this.index, value: this.importantValue, id: this.task.id})
-      }
-    }
-    onCheck(event){
-      this.checkboxValue = event.target.checked;
-      this.onCheckboxChecked.emit({
-        index: this.index,
-        value: event.target.checked,
-        id: this.task.id
-      });
-      this.checkedInactive = !event.target.checked;
+        .catch(_ => console.log('Something whent wrong'));
     }
   }
+
+  counterMinus(event) {
+    this.counterActive  = true;
+    if (this.importantValue > 0) {
+      this.importantValue--;
+      this.api.update(
+        this.task.id,
+        {important: this.importantValue}
+      )
+        .then(_ => console.log('Important changed'))
+        .catch(_ => console.log('Something whent wrong'));
+    }
+  }
+
+  onCheck(event) {
+    this.checkboxValue = event.target.checked;
+    this.api.update(
+      this.task.id,
+      {completed: event.target.checked}
+    )
+      .then(_ => {
+        console.log('Completed changed');
+      })
+      .catch(_ => console.log('Something whent wrong'));
+  }
+}

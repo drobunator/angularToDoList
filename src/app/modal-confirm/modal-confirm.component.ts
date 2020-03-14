@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ConfirmService} from '../services/confirm.service';
 
 @Component({
   selector: 'app-modal-confirm',
@@ -6,17 +7,15 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./modal-confirm.component.scss']
 })
 export class ModalConfirmComponent implements OnInit {
-  title = 'Are you sure?';
 
-  @Output() onModalConfirmValue: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor() {
+  constructor(public confirm: ConfirmService) {
   }
 
   ngOnInit(): void {
   }
 
-  confirmModalValue(value: boolean) {
-    this.onModalConfirmValue.emit(value);
-  }
+  // confirmResp(value: boolean){
+  //   this.confirm.delete()
+  // }
 }
