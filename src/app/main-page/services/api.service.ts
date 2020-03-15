@@ -28,7 +28,8 @@ export class ApiService {
     return this.http.collection('tasks').doc(id).delete();
   }
 
-  // createUser(user: object, id: string) {
-  //   return this.http.collection('users').doc(id).set(user);
-  // }
+  createUser(user: object, id: string) {
+    return this.http.collection('users').doc(id).set(user);
+  }
+
 }

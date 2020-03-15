@@ -21,11 +21,11 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {SharedModule} from './shared/shared.module';
 import {CommonModule} from '@angular/common';
 import { MainPageComponent } from './main-page/main-page.component';
-import {RouterModule, Routes} from '@angular/router';
+import {AppRoutingModule} from './app-routing.module';
+import {AuthModule} from './auth/auth.module';
+import {AngularFireAuthModule} from '@angular/fire/auth';
 
-const routes: Routes = [
-  {path: '', component: MainPageComponent}
-];
+
 
 
 @NgModule({
@@ -50,9 +50,11 @@ const routes: Routes = [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
+    AngularFireAuthModule,
     SharedModule,
     CommonModule,
-    RouterModule.forRoot(routes)
+    AppRoutingModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

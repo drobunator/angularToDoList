@@ -5,6 +5,9 @@ import {RegisterComponent} from './register/register.component';
 import {SharedModule} from '../shared/shared.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
+import {BrowserModule} from '@angular/platform-browser';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireModule} from '@angular/fire';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -21,11 +24,14 @@ const routes: Routes = [
     RegisterComponent
   ],
   imports: [
+    BrowserModule,
     CommonModule,
     SharedModule,
     FormsModule,
     RouterModule.forChild(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireAuthModule,
+    AngularFireModule
   ]
 })
 export class AuthModule {
