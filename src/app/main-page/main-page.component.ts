@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ConfirmService} from '../services/confirm.service';
-import {DataService} from '../services/data.service';
+import {ConfirmService} from './services/confirm.service';
+import {DataService} from './services/data.service';
 
 
 @Component({

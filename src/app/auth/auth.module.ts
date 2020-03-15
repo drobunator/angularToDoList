@@ -2,9 +2,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
-import {AngularFireAuthModule} from '@angular/fire/auth';
 import {SharedModule} from '../shared/shared.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
@@ -13,17 +12,20 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [
+    LoginComponent,
+    RegisterComponent
+  ],
   exports: [
     LoginComponent,
     RegisterComponent
   ],
   imports: [
     CommonModule,
-    AngularFireAuthModule,
     SharedModule,
     FormsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ReactiveFormsModule
   ]
 })
 export class AuthModule {

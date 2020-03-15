@@ -1,12 +1,12 @@
 <div class="container">
-  <form class="register-form">
-    <input type="text" class="register-form__input" placeholder="First name">
-    <input type="text" class="register-form__input" placeholder="Last name">
-    <input type="text" class="register-form__input" placeholder="Enter uour email">
-    <input type="password" class="register-form__input" placeholder="Enter your password">
+  <form class="register-form" [formGroup]="registerForm" (ngSubmit)="submit()">
+    <input type="text" class="register-form__input" placeholder="First name" formControlName="firstName">
+    <input type="text" class="register-form__input" placeholder="Last name" formControlName="lastName">
+    <input type="text" class="register-form__input" placeholder="Enter uour email" formControlName="email">
+    <input type="password" class="register-form__input" placeholder="Enter your password" formControlName="password">
     <div class="wrapp">
       <button type="submit" class="btn-register">SingUp</button>
-      <span class="span_style">or <a href="#" class="login-link_style">LogIn</a></span>
+      <span class="span_style">or <a routerLink="/login" class="login-link_style">LogIn</a></span>
     </div>
   </form>
 </div>
