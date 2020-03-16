@@ -31,5 +31,4 @@ export class ApiService {
   createUser(user: object, id: string) {
     return this.http.collection('users').doc(id).set(user);
   }
-
 }

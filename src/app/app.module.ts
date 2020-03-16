@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './main-page/header/header.component';
 import {ButtonsBlockComponent} from './main-page/buttons-block/buttons-block.component';
@@ -25,8 +24,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {AuthModule} from './auth/auth.module';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import { PopupModalComponent } from './popup-modal/popup-modal.component';
-
-
 
 
 @NgModule({

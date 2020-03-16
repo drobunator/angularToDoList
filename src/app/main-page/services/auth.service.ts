@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from './api.service';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {Router} from '@angular/router';
 
 
 @Injectable({
@@ -8,11 +9,15 @@ import {AngularFireAuth} from '@angular/fire/auth';
 })
 export class AuthService {
 
+  userId = '';
+
   constructor(
     private auth: AngularFireAuth,
-    private api: ApiService
+    private api: ApiService,
+    private router: Router
   ) {
   }
+
 
   create(user) {
     this.auth.auth.createUserWithEmailAndPassword(user.email, user.password)
@@ -26,18 +31,35 @@ export class AuthService {
   }
 
   login(user) {
-    this.auth.auth.signInWithEmailAndPassword(user.email, user.password)
-      .then(resp => console.log(resp))
-      .catch(err => console.log(err));
+    return this.auth.auth.signInWithEmailAndPassword(user.email, user.password)
+      .then(resp => {
+        console.log('login auth service', resp);
+        if (resp.user.uid) {
+          this.router.navigate(['/']);
+          this.userId = resp.user.uid;
+        } else {
+          this.userId = '';
+        }
+      });
   }
 
   logout() {
-    this.auth.auth.signOut()
-      .then(resp => console.log(resp))
-      .catch(err => console.log(err));
+    this.auth.auth.signOut().then(resp => {
+      console.log('logout');
+      this.userId = '';
+      this.router.navigate(['login']);
+    });
   }
 
-  get currentUser() {
-    return this.auth.auth.currentUser.uid;
+  isAuthenticated() {
+    return new Promise(resolve => {
+      this.auth.authState.subscribe(resp => {
+        if (resp) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
   }
 }

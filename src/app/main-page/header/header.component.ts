@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ApiService} from '../services/api.service';
+import {AuthService} from '../services/auth.service';
 
 export interface Task {
   id?: any;
@@ -25,10 +26,9 @@ export class HeaderComponent implements OnInit {
 
   @Output() addNewTask: EventEmitter<Task> = new EventEmitter<Task>();
   @Output() emptyAddTaskInput: EventEmitter<any> = new EventEmitter<any>();
-  // tslint:disable-next-line:no-output-on-prefix
   @Output() onSearchInput: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(public api: ApiService) {
+  constructor(public api: ApiService, public auth: AuthService) {
   }
 
   ngOnInit(): void {
@@ -53,6 +53,7 @@ export class HeaderComponent implements OnInit {
         important: this.importantValue,
         completed: false,
         date: Date.now(),
+        tasks: {},
       };
       this.api.post(task);
       this.taskText = '';
@@ -65,4 +66,5 @@ export class HeaderComponent implements OnInit {
   searchInput() {
     this.onSearchInput.emit(this.searchValue);
   }
+
 }
