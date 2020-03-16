@@ -36,4 +36,8 @@ export class AuthService {
       .then(resp => console.log(resp))
       .catch(err => console.log(err));
   }
+
+  get currentUser() {
+    return this.auth.auth.currentUser.uid;
+  }
 }

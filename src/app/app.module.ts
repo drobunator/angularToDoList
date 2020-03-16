@@ -24,6 +24,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import {AppRoutingModule} from './app-routing.module';
 import {AuthModule} from './auth/auth.module';
 import {AngularFireAuthModule} from '@angular/fire/auth';
+import { PopupModalComponent } from './popup-modal/popup-modal.component';
 
 
 
@@ -38,7 +39,8 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
     ModalAlertComponent,
     SearchPipePipe,
     SortPipe,
-    MainPageComponent
+    MainPageComponent,
+    PopupModalComponent
   ],
   imports: [
     BrowserModule,

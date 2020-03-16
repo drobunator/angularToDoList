@@ -15,7 +15,4 @@ export class ModalConfirmComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // confirmResp(value: boolean){
-  //   this.confirm.delete()
-  // }
 }
