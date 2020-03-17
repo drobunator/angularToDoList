@@ -11,8 +11,8 @@ import {DataService} from './services/data.service';
 export class MainPageComponent implements OnInit {
   modalAlertClose = false;
   searchInputValue = '';
-  sortValue: string;
-  sortKey: string;
+  sortValue = 'max';
+  sortKey = 'date';
   tasks: any[] = [];
   loading = false;
   emptyTitle = 'todo list is empty';

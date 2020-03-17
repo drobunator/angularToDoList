@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ApiService} from '../services/api.service';
 import {AuthService} from '../services/auth.service';
+import {DataService} from '../services/data.service';
 
 export interface Task {
   id?: any;
@@ -28,7 +29,7 @@ export class HeaderComponent implements OnInit {
   @Output() emptyAddTaskInput: EventEmitter<any> = new EventEmitter<any>();
   @Output() onSearchInput: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(public api: ApiService, public auth: AuthService) {
+  constructor(public api: ApiService, public auth: AuthService, public data: DataService) {
   }
 
   ngOnInit(): void {
@@ -53,7 +54,6 @@ export class HeaderComponent implements OnInit {
         important: this.importantValue,
         completed: false,
         date: Date.now(),
-        tasks: {},
       };
       this.api.post(task);
       this.taskText = '';
@@ -67,4 +67,11 @@ export class HeaderComponent implements OnInit {
     this.onSearchInput.emit(this.searchValue);
   }
 
+  logout() {
+
+    this.auth.logout().then(_ => {
+      this.data.unsubscribe();
+      console.log('header unsub')
+    });
+  }
 }

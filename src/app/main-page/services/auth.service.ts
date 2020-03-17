@@ -9,46 +9,41 @@ import {Router} from '@angular/router';
 })
 export class AuthService {
 
-  userId = '';
-
   constructor(
     private auth: AngularFireAuth,
     private api: ApiService,
     private router: Router
-  ) {
-  }
+  ) {}
 
 
   create(user) {
-    this.auth.auth.createUserWithEmailAndPassword(user.email, user.password)
+    return this.auth.auth.createUserWithEmailAndPassword(user.email, user.password)
       .then(resp => {
-        console.log(resp);
-        this.api.createUser(user, resp.user.uid)
-          .then(r => console.log(r))
+        this.api.createUser(user, resp.user.uid).then(_ => {})
           .catch(err => console.log(err));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log('auth err', err));
   }
+
 
   login(user) {
     return this.auth.auth.signInWithEmailAndPassword(user.email, user.password)
       .then(resp => {
-        console.log('login auth service', resp);
         if (resp.user.uid) {
           this.router.navigate(['/']);
-          this.userId = resp.user.uid;
-        } else {
-          this.userId = '';
         }
-      });
+      })
+      .catch(err => console.log(err));
   }
 
   logout() {
-    this.auth.auth.signOut().then(resp => {
-      console.log('logout');
-      this.userId = '';
+    return this.auth.auth.signOut().then(resp => {
       this.router.navigate(['login']);
     });
+  }
+
+  authState() {
+    return this.auth.authState;
   }
 
   isAuthenticated() {

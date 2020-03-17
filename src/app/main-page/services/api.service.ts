@@ -5,30 +5,37 @@ import {AngularFirestore} from '@angular/fire/firestore';
   providedIn: 'root'
 })
 export class ApiService {
+  private id = '';
+
   constructor(private http: AngularFirestore) {
   }
 
-  get() {
-    return this.http.collection('tasks').snapshotChanges();
+
+  get(id) {
+    this.id = id;
+    return this.http.collection(`users/${id}/tasks`).snapshotChanges();
   }
 
   post(task: object) {
     const id = this.http.createId();
-    return this.http.collection('tasks').doc(id).set({
+    return this.http.collection(`users/${this.id}/tasks`).doc(id).set({
       ...task,
       id
     });
   }
 
   update(id, value) {
-    return this.http.collection('tasks').doc(id).update(value);
+    return this.http.collection(`users/${this.id}/tasks`).doc(id).update(value);
   }
 
   delete(id: string) {
-    return this.http.collection('tasks').doc(id).delete();
+    return this.http.collection(`users/${this.id}/tasks`).doc(id).delete();
   }
 
   createUser(user: object, id: string) {
-    return this.http.collection('users').doc(id).set(user);
+    return this.http.collection('users').doc(id).set({
+      ...user,
+      tasks: {}
+    });
   }
 }

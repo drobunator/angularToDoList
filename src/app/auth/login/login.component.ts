@@ -29,7 +29,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.auth.login(this.loginForm.value);
-    this.loginForm.reset();
+    this.auth.login(this.loginForm.value).then(resp => {
+      this.loginForm.reset();
+    });
+
   }
 }
