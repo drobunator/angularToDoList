@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../main-page/services/auth.service';
+import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -38,13 +38,14 @@ export class RegisterComponent implements OnInit {
   }
 
   submit() {
-    this.auth.create(this.registerForm.value);
-    // .catch(err => console.log(err))
-    // .then(resp => {
-    //   console.log('register create', resp);
-    //   // this.router.navigate(['/']);
-    //   // this.registerForm.reset();
-    // });
-
+    if (this.registerForm.valid) {
+      this.auth.create(this.registerForm.value);
+      // .catch(err => console.log(err))
+      // .then(resp => {
+      //   console.log('register create', resp);
+      //   // this.router.navigate(['/']);
+      //   // this.registerForm.reset();
+      // });
+    }
   }
 }

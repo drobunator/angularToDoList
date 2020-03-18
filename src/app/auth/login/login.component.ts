@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../main-page/services/auth.service';
+import {AuthService} from '../auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {PopupModalService} from '../../popup-modal/popup-modal.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,11 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    public popup: PopupModalService
+  ) {
   }
 
   ngOnInit(): void {
@@ -30,6 +35,8 @@ export class LoginComponent implements OnInit {
   login() {
     if (!this.loginForm.invalid) {
       this.auth.login(this.loginForm.value).then(resp => {
+        this.popup.popupVisible(true, true);
+        this.popup.title = 'Loggined';
         this.loginForm.reset();
       });
     }

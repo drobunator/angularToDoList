@@ -2,7 +2,7 @@ import {Injectable, OnInit} from '@angular/core';
 import {map} from 'rxjs/operators';
 import {ApiService} from './api.service';
 import {BehaviorSubject} from 'rxjs';
-import {AuthService} from './auth.service';
+import {AuthService} from '../../auth/auth.service';
 
 
 @Injectable({

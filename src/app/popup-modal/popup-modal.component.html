@@ -1,3 +1,8 @@
-<div class="popup-card popup-card_succes">
-  <p class="popup-title">{{title}}</p>
+<div class="popup-card popup-card_danger"
+
+[ngClass]="{
+success: popup.success === true
+}"
+>
+  <p class="popup-title">{{popup.title}}</p>
 </div>

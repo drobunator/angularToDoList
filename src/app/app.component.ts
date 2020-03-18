@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {PopupModalService} from './popup-modal/popup-modal.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,9 @@ import {Component, OnInit} from '@angular/core';
 export class AppComponent implements OnInit {
 
   constructor(
-  ) {}
+    public popup: PopupModalService
+  ) {
+  }
 
 
   ngOnInit(): void {

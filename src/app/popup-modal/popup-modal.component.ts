@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {PopupModalService} from './popup-modal.service';
 
 @Component({
   selector: 'app-popup-modal',
@@ -6,17 +7,12 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./popup-modal.component.scss']
 })
 export class PopupModalComponent implements OnInit {
-  title = 'Popup title';
 
-  constructor() {
+
+  constructor(public popup: PopupModalService) {
   }
 
   ngOnInit(): void {
   }
-
-  set popupTitle(value) {
-    this.title = value;
-  }
-
 
 }

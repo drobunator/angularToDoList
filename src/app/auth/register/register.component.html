@@ -1,6 +1,5 @@
 <div class="container">
 
-
   <form class="register-form" [formGroup]="registerForm" (ngSubmit)="submit()">
     <input type="text" class="register-form__input" placeholder="First name" formControlName="firstName">
     <div class="error-message"
@@ -32,6 +31,46 @@
              *ngIf=" registerForm.get('email').errors.required"
       >Введите email</small>
       <small class="error-message__text"
+My To Do List
+￼
+0
+
+￼+
+￼-
+￼￼Add task
+￼Sort text
+￼Sort completed
+￼Sort important
+￼Sort date
+￼
+This is working)
+
+03:13:40, 17.03.2020
+
+5
+
+￼￼+
+￼-
+￼
+￼Cancel
+￼Edit
+￼￼
+￼
+￼
+Hello
+
+02:24:34, 17.03.2020
+
+3
+
+￼￼+
+￼-
+￼
+￼Cancel
+￼Edit
+￼￼
+￼
+Loggined
              *ngIf="registerForm.get('email').errors.email">
         Email должен быть типа: "exmple@mail.com" </small>
     </div>
@@ -55,3 +94,4 @@
     </div>
   </form>
 </div>
+

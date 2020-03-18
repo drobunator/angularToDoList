@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ApiService} from '../services/api.service';
-import {AuthService} from '../services/auth.service';
+import {AuthService} from '../../auth/auth.service';
 import {DataService} from '../services/data.service';
 
 export interface Task {
