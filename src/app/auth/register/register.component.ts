@@ -11,23 +11,23 @@ import {Router} from '@angular/router';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) {
 
   }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
       firstName: new FormControl(null, [
-        Validators.minLength(1),
         Validators.required
       ]),
       lastName: new FormControl(null, [
-        Validators.minLength(1),
         Validators.required
       ]),
       email: new FormControl(null, [
         Validators.email,
-        Validators.minLength(1),
         Validators.required
       ]),
       password: new FormControl(null, [
@@ -38,11 +38,13 @@ export class RegisterComponent implements OnInit {
   }
 
   submit() {
-    this.auth.create(this.registerForm.value).then(resp => {
-      console.log('register create', resp);
-      this.router.navigate(['/'])
-      this.registerForm.reset();
-    });
+    this.auth.create(this.registerForm.value);
+    // .catch(err => console.log(err))
+    // .then(resp => {
+    //   console.log('register create', resp);
+    //   // this.router.navigate(['/']);
+    //   // this.registerForm.reset();
+    // });
 
   }
 }

@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
     this.loginForm = new FormGroup({
       email: new FormControl(null, [
         Validators.email,
-        Validators.minLength(1),
         Validators.required
       ]),
       password: new FormControl(null, [
@@ -29,9 +28,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.auth.login(this.loginForm.value).then(resp => {
-      this.loginForm.reset();
-    });
-
+    if (!this.loginForm.invalid) {
+      this.auth.login(this.loginForm.value).then(resp => {
+        this.loginForm.reset();
+      });
+    }
   }
 }

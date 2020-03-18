@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container">
   <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
 
     <input
@@ -6,13 +6,32 @@
       class="login-form__input"
       placeholder="Enter uour email"
       formControlName="email">
-
+    <div class="error-message"
+         *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched"
+    >
+      <small class="error-message__text"
+             *ngIf=" loginForm.get('email').errors.required"
+      >Введите email</small>
+      <small class="error-message__text"
+             *ngIf="loginForm.get('email').errors.email">
+        Email должен быть типа: "exmple@mail.com" </small>
+    </div>
     <input
       type="password"
       class="login-form__input"
       placeholder="Enter your password"
       formControlName="password">
-
+    <div class="error-message"
+         *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
+      <small class="error-message__text"
+             *ngIf="loginForm.get('password').errors.required">
+        Введите пароль
+      </small>
+      <small class="error-message__text"
+             *ngIf="loginForm.get('password').errors.minlength">
+        Длинна пароля должна быть не меньше 6 символов
+      </small>
+    </div>
     <div class="wrapp">
       <button type="submit" class="btn-login">LogIn</button>
       <span class="span_style">or <a routerLink="/register" class="login-link_style">Register</a></span>

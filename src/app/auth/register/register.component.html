@@ -1,9 +1,54 @@
 <div class="container">
+
+
   <form class="register-form" [formGroup]="registerForm" (ngSubmit)="submit()">
     <input type="text" class="register-form__input" placeholder="First name" formControlName="firstName">
+    <div class="error-message"
+         *ngIf="registerForm.get('firstName').invalid && registerForm.get('firstName').touched">
+      <small class="error-message__text"
+             *ngIf="registerForm.get('firstName').errors.required">
+       Имя должно содержать хотя бы одну букву
+      </small>
+
+    </div>
+
+
     <input type="text" class="register-form__input" placeholder="Last name" formControlName="lastName">
+    <div class="error-message"
+         *ngIf="registerForm.get('lastName').invalid && registerForm.get('lastName').touched">
+      <small class="error-message__text"
+             *ngIf="registerForm.get('lastName').errors.required">
+        Имя должно содержать хотя бы одну букву
+      </small>
+    </div>
+
+
+
     <input type="text" class="register-form__input" placeholder="Enter uour email" formControlName="email">
+    <div class="error-message"
+         *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched"
+    >
+      <small class="error-message__text"
+             *ngIf=" registerForm.get('email').errors.required"
+      >Введите email</small>
+      <small class="error-message__text"
+             *ngIf="registerForm.get('email').errors.email">
+        Email должен быть типа: "exmple@mail.com" </small>
+    </div>
+
+
     <input type="password" class="register-form__input" placeholder="Enter your password" formControlName="password">
+    <div class="error-message"
+         *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched">
+      <small class="error-message__text"
+             *ngIf="registerForm.get('password').errors.required">
+        Введите пароль
+      </small>
+      <small class="error-message__text"
+             *ngIf="registerForm.get('password').errors.minlength">
+        Длинна пароля должна быть не меньше 6 символов
+      </small>
+    </div>
     <div class="wrapp">
       <button type="submit" class="btn-register">SingUp</button>
       <span class="span_style">or <a routerLink="/login" class="login-link_style">LogIn</a></span>
