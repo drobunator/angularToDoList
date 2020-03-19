@@ -25,7 +25,6 @@
     word-wrap: break-word;
   }
 
-
   &__date {
     width: 20px;
     height: 20px;
@@ -131,6 +130,9 @@
   &__buttons {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+  align-content: center;
+
 
     .btn-important {
       width: 20px;
@@ -143,6 +145,19 @@
       cursor: pointer;
       font-style: italic;
       font-weight: 600;
+
+      &_send{
+        position: absolute;
+        bottom: -30px;
+        left: 2px;
+        width: 40px;
+        padding: 1px;
+        height: auto;
+        &:hover{
+          background: #26d130;
+          transition: background linear .3s;
+        }
+      }
     }
 
     .btn-important_close {

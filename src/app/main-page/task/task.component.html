@@ -1,9 +1,9 @@
 <li class="task" [ngClass]="{
-task_one: importantValue === 1,
-task_two: importantValue === 2,
-task_three: importantValue === 3,
-task_four: importantValue === 4,
-task_fife: importantValue === 5,
+task_one: counter.value === 1,
+task_two: counter.value === 2,
+task_three: counter.value === 3,
+task_four: counter.value === 4,
+task_fife: counter.value === 5,
 task_inactive: checkboxValue
 }">
 
@@ -17,11 +17,12 @@ task_inactive: checkboxValue
 
 
   <div class="important-block" [ngClass]="{'important-block_active': counterActive}">
-    <p class="important-block___value"> {{ importantValue }} </p>
+    <p class="important-block___value"> {{ counter.value }} </p>
     <div class="important-block__buttons">
-      <button class="btn-important_close" (click)="counterActive = !counterActive"></button>
-      <button class="btn-important" (click)="counterPlus($event); counterActive = true">+</button>
-      <button class="btn-important" (click)="counterMinus($event)">-</button>
+      <button class="btn-important_close" (click)="counterClose()"></button>
+      <button class="btn-important" (click)="counter.inc()">+</button>
+      <button class="btn-important" (click)="counter.dec()">-</button>
+        <button class="btn-important btn-important_send" (click)="updateImportant()">Ok</button>
     </div>
   </div>
 

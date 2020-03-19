@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './main-page/header/header.component';
 import {ButtonsBlockComponent} from './main-page/buttons-block/buttons-block.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TaskComponent} from './main-page/task/task.component';
 import {ModalConfirmComponent} from './main-page/modal-confirm/modal-confirm.component';
 import {ModalAlertComponent} from './main-page/modal-alert/modal-alert.component';
@@ -37,22 +37,23 @@ import {AuthModule} from './auth/auth.module';
     SortPipe,
     MainPageComponent,
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule,
-    AngularFirestoreModule,
-    AngularFireAuthModule,
-    SharedModule,
-    CommonModule,
-    AppRoutingModule,
-    AuthModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireDatabaseModule,
+        AngularFirestoreModule,
+        AngularFireAuthModule,
+        SharedModule,
+        CommonModule,
+        AppRoutingModule,
+        AuthModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   exports: [],
   bootstrap: [AppComponent]

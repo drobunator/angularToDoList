@@ -1,7 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ApiService} from '../services/api.service';
-import {AuthService} from '../../auth/auth.service';
-import {DataService} from '../services/data.service';
+import {ApiService} from '../../services/api.service';
+import {AuthService} from '../../services/auth.service';
+import {DataService} from '../../services/data.service';
+import {CounterService} from '../../services/counter.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 export interface Task {
   id?: any;
@@ -9,57 +11,59 @@ export interface Task {
   important: number;
   completed: boolean;
   date: any;
-
 }
 
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  providers: [CounterService]
 })
 
 
 export class HeaderComponent implements OnInit {
-  importantValue = 0;
-  taskText = '';
   searchValue = '';
+  form: FormGroup;
+  valid = false;
 
-  @Output() addNewTask: EventEmitter<Task> = new EventEmitter<Task>();
-  @Output() emptyAddTaskInput: EventEmitter<any> = new EventEmitter<any>();
   @Output() onSearchInput: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(public api: ApiService, public auth: AuthService, public data: DataService) {
+  constructor(
+    public api: ApiService,
+    public auth: AuthService,
+    public data: DataService,
+    public counter: CounterService
+  ) {
+    this.counter.setValue = 0;
+    this.form = new FormGroup({
+      text: new FormControl(
+        null,
+        [Validators.required]
+      )
+    });
   }
 
   ngOnInit(): void {
+    console.log(this.auth.currentUser.uid)
+    this.api.getUserData(this.auth.currentUser.uid)
+      .subscribe(resp => console.log(resp.payload.data()));
   }
 
-  importantValuePlus() {
-    if (this.importantValue < 5) {
-      this.importantValue++;
-    }
-  }
-
-  importantValueMinus() {
-    if (this.importantValue > 0) {
-      this.importantValue--;
-    }
-  }
 
   createNewTask() {
-    if (this.taskText.trim()) {
-      const task = {
-        text: this.taskText,
-        important: this.importantValue,
+    if (this.form.valid) {
+      const task: Task = {
+        text: this.form.value.text,
+        important: this.counter.value,
         completed: false,
         date: Date.now(),
       };
       this.api.post(task);
-      this.taskText = '';
-      this.importantValue = 0;
-    } else {
-      this.emptyAddTaskInput.emit(true);
+      this.counter.setValue = 0;
+      this.form.reset();
+    } else{
+      this.valid = true;
     }
   }
 
@@ -68,10 +72,8 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-
     this.auth.logout().then(_ => {
       this.data.unsubscribe();
-      console.log('header unsub')
     });
   }
 }

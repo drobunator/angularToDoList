@@ -15,6 +15,9 @@ export class ApiService {
     this.id = id;
     return this.http.collection(`users/${id}/tasks`).snapshotChanges();
   }
+  getUserData(id){
+    return this.http.collection(`users/`).doc(id).snapshotChanges()
+  }
 
   post(task: object) {
     const id = this.http.createId();

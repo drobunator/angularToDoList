@@ -2,18 +2,30 @@
   <button class="btn btn_logout" (click)="logout()">LogOut</button>
   <div class="wrapp">
     <h1 class="header__title">My To Do List</h1>
-    <input type="search" class="header__search" placeholder="Enter your search text" (input)="searchInput()" [(ngModel)]="searchValue">
+    <input type="search" class="header__search" placeholder="Enter your search text" (input)="searchInput()"
+           [(ngModel)]="searchValue">
   </div>
- <div class="header__forms">
-   <div class="important-block">
-     <p class="important-block__value">{{importantValue}}</p>
-     <div class="important-block__buttons">
-       <button class="btn-important btn-plus" (click)="importantValuePlus()" >+</button>
-       <button class="btn-important btn-minus" (click)="importantValueMinus()">-</button>
-     </div>
-   </div>
-   <input type="text" class="form-text " placeholder="Add new task" (keyup.enter)="createNewTask()" [(ngModel)]="taskText">
-   <button class="btn btn_add" (click)="createNewTask()">Add task</button>
- </div>
 
+  <div class="header__forms">
+    <div class="important-block">
+      <p class="important-block__value">{{counter.value}}</p>
+      <div class="important-block__buttons">
+        <button class="btn-important btn-plus" (click)="counter.inc()">+</button>
+        <button class="btn-important btn-minus" (click)="counter.dec()">-</button>
+      </div>
+    </div>
+
+    <form class="form-text" [formGroup]="form" (ngSubmit)="createNewTask()">
+      <input
+        type="text"
+        class="form-text__input" placeholder="Add new task"
+        (keyup.enter)="createNewTask()"
+      formControlName="text">
+      <button type="submit" class="btn btn_add">Add task</button>
+    </form>
+  </div>
+  <div class="form-error">
+    <small *ngIf="form.get('text').errors.required && form.get('text').touched">
+      Введите текст</small>
+  </div>
 </header>

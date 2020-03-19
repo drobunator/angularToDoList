@@ -2,7 +2,7 @@ import {Injectable, OnInit} from '@angular/core';
 import {map} from 'rxjs/operators';
 import {ApiService} from './api.service';
 import {BehaviorSubject} from 'rxjs';
-import {AuthService} from '../../auth/auth.service';
+import {AuthService} from './auth.service';
 
 
 @Injectable({
@@ -13,12 +13,11 @@ export class DataService {
   private items: any[] = [];
 
   constructor(private api: ApiService, private auth: AuthService) {
-    this.auth.authState().subscribe(resp => {
+    auth.authState().subscribe(resp => {
       if (!resp) {
         return;
       }
       this.data(resp.uid);
-      console.log(resp.uid)
     });
 
   }

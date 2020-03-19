@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ApiService} from '../main-page/services/api.service';
+import {ApiService} from './api.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {PopupModalService} from '../popup-modal/popup-modal.service';
@@ -63,6 +63,10 @@ export class AuthService {
 
   authState() {
     return this.auth.authState;
+  }
+
+  get currentUser() {
+    return this.auth.auth.currentUser;
   }
 
   isAuthenticated() {

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ConfirmService} from '../services/confirm.service';
+import {ConfirmService} from '../../services/confirm.service';
 
 @Component({
   selector: 'app-modal-confirm',
