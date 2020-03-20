@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {PopupModalService} from '../../popup-modal/popup-modal.service';
+import {PopupModalService} from '../../services/popup-modal.service';
 
 @Component({
   selector: 'app-login',

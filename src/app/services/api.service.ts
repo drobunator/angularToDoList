@@ -7,7 +7,9 @@ import {AngularFirestore} from '@angular/fire/firestore';
 export class ApiService {
   private id = '';
 
-  constructor(private http: AngularFirestore) {
+  constructor(
+    private http: AngularFirestore
+  ) {
   }
 
 
@@ -15,8 +17,9 @@ export class ApiService {
     this.id = id;
     return this.http.collection(`users/${id}/tasks`).snapshotChanges();
   }
-  getUserData(id){
-    return this.http.collection(`users/`).doc(id).snapshotChanges()
+
+  getUserData(id) {
+    return this.http.collection(`users/`).doc(id).snapshotChanges();
   }
 
   post(task: object) {

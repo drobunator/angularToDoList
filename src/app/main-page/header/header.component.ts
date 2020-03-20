@@ -39,15 +39,14 @@ export class HeaderComponent implements OnInit {
     this.form = new FormGroup({
       text: new FormControl(
         null,
-        [Validators.required]
+        [
+          Validators.minLength(1),
+          Validators.required]
       )
     });
   }
 
   ngOnInit(): void {
-    console.log(this.auth.currentUser.uid)
-    this.api.getUserData(this.auth.currentUser.uid)
-      .subscribe(resp => console.log(resp.payload.data()));
   }
 
 

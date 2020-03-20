@@ -27,8 +27,7 @@ export class CounterService {
   }
 
   changeValue(id: string) {
-    this.api.update(id, {important: this.value})
-      .then(resp => console.log(resp));
+    this.api.update(id, {important: this.value});
   }
 
 }

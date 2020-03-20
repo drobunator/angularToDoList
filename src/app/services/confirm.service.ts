@@ -15,9 +15,7 @@ export class ConfirmService {
   delete(value: boolean) {
     if (value) {
       this.activeConfirm = false;
-      this.api.delete(this.taskId)
-        .then(_ => console.log('Task deleted'))
-        .catch(_ => console.log('Somthing whent wrong!!!'));
+      this.api.delete(this.taskId);
     } else {
       this.activeConfirm = false;
     }

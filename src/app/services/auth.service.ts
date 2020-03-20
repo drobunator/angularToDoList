@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ApiService} from './api.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
-import {PopupModalService} from '../popup-modal/popup-modal.service';
+import {PopupModalService} from './popup-modal.service';
 
 
 @Injectable({
@@ -26,8 +26,7 @@ export class AuthService {
           this.popup.popupVisible(true, true);
           this.popup.title = 'Registred';
           this.router.navigate(['/']);
-        })
-          .catch(err => console.log(err));
+        });
       })
       .catch(err => {
         this.popup.popupVisible(true);
