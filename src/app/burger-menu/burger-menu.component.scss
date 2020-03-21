@@ -1,0 +1,17 @@
+.menu-list{
+  max-width: 150px;
+  width: 100%;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 300;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  border-top: 1px solid;
+  &__item{
+    list-style: none;
+    width: 100%;
+    padding: 10px 5px;
+    border-bottom: 1px solid ;
+  }
+}

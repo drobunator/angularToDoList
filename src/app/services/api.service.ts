@@ -38,10 +38,11 @@ export class ApiService {
     return this.http.collection(`users/${this.id}/tasks`).doc(id).delete();
   }
 
-  createUser(user: object, id: string) {
+  createUser(user, id: string) {
     return this.http.collection('users').doc(id).set({
-      ...user,
-      tasks: {}
+      email: user.email,
+      firstName: user.firstName,
+      lastNamne: user.lastName,
     });
   }
 }
