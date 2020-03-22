@@ -92,6 +92,7 @@
       display: flex;
       align-items: baseline;
       width: 100%;
+
       &__input {
         font-family: 'Exo 2', sans-serif;
         font-style: italic;
@@ -122,7 +123,8 @@
       }
     }
   }
-  .form-error{
+
+  .form-error {
     position: absolute;
     bottom: 10px;
     left: calc(25%);
