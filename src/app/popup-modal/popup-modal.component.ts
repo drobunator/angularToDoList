@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PopupModalService} from './popup-modal.service';
+import {PopupModalService} from '../services/popup-modal.service';
 
 @Component({
   selector: 'app-popup-modal',

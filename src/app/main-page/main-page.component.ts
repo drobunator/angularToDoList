@@ -14,7 +14,7 @@ export class MainPageComponent implements OnInit {
   sortValue = 'max';
   sortKey = 'date';
   tasks: any[] = [];
-  loading = false;
+  loading: any;
   emptyTitle = 'todo list is empty';
 
   constructor(

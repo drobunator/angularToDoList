@@ -23,6 +23,7 @@ import {MainPageComponent} from './main-page/main-page.component';
 import {AppRoutingModule} from './app-routing.module';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AuthModule} from './auth/auth.module';
+import { BurgerMenuComponent } from './burger-menu/burger-menu.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import {AuthModule} from './auth/auth.module';
     SearchPipePipe,
     SortPipe,
     MainPageComponent,
+    BurgerMenuComponent,
   ],
     imports: [
         BrowserModule,
