@@ -1,6 +1,6 @@
 <header class="header">
-  <button class="btn-burger"></button>
-  <app-burger-menu></app-burger-menu>
+  <button class="btn-burger" (click)="visible = !visible"></button>
+  <app-burger-menu *ngIf="visible"></app-burger-menu>
   <div class="wrapp">
     <h1 class="header__title">My To Do List</h1>
     <input type="search" class="header__search" placeholder="Enter your search text" (input)="searchInput()"

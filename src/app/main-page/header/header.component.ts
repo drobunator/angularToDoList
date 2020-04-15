@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
   valid = false;
 
   @Output() onSearchInput: EventEmitter<any> = new EventEmitter<any>();
+  visible = false;
 
   constructor(
     public api: ApiService,
@@ -70,8 +71,5 @@ export class HeaderComponent implements OnInit {
     this.onSearchInput.emit(this.searchValue);
   }
 
-  logout() {
-    this.auth.logout().then(_ => {
-    });
-  }
+
 }

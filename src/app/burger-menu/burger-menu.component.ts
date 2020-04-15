@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {ApiService, UserData} from '../services/api.service';
 
@@ -7,16 +7,24 @@ import {ApiService, UserData} from '../services/api.service';
   templateUrl: './burger-menu.component.html',
   styleUrls: ['./burger-menu.component.scss']
 })
-export class BurgerMenuComponent implements OnInit {
+export class BurgerMenuComponent implements OnInit, OnDestroy {
   userInfo: any;
+  sub: any;
 
   constructor(private auth: AuthService, private api: ApiService) {
   }
 
   ngOnInit(): void {
-    this.api.getUserData(this.auth.currentUser.uid).subscribe(data => {
+   this.sub = this.api.getUserData(this.auth.currentUser.uid).subscribe(data => {
       this.userInfo = data.payload.data();
-      console.log(data.payload.data());
     });
+  }
+
+  logout() {
+    this.auth.logout().then(_ => {
+    });
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

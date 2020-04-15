@@ -1,12 +1,14 @@
 <ul class="menu-list">
   <li class="menu-list__item">
     <p class="item-text">Email: {{userInfo?.email}}</p>
-  </li><li class="menu-list__item">
+  </li>
+  <li class="menu-list__item">
     <p class="item-text">Name: {{userInfo?.firstName}} </p>
-  </li><li class="menu-list__item">
+  </li>
+  <li class="menu-list__item">
     <p class="item-text">Last Name: {{userInfo?.lastName}} </p>
   </li>
   <li class="menu-list__item">
-    <button class="btn-burger">LogOut</button>
+    <button class="btn-burger" (click)="logout()">LogOut</button>
   </li>
 </ul>

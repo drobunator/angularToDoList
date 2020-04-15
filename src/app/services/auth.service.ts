@@ -38,10 +38,13 @@ export class AuthService {
     return this.auth.auth.signInWithEmailAndPassword(user.email, user.password)
       .then(resp => {
         if (resp.user.uid) {
+          this.popup.popupVisible(true, true);
+          this.popup.title = 'Logпined';
           this.router.navigate(['/']);
         }
       })
       .catch(err => {
+        console.log(err.massage)
         this.popup.title = err.message;
         this.popup.popupVisible(true);
       });
