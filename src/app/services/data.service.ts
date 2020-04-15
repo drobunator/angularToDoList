@@ -43,9 +43,7 @@ export class DataService {
       });
   }
 
-  unsubscribe() {
-    this.items = [];
-  }
+
 
 
 }

@@ -46,7 +46,7 @@ export class TaskComponent implements OnInit {
       this.task.id,
       {text: this.editFormValue}
     )
-      .then(_ => console.log());
+      .catch(err => console.log(err))
     this.taskEditActive = false;
   }
 
@@ -62,17 +62,12 @@ export class TaskComponent implements OnInit {
       this.task.id,
       {completed: event.target.checked}
     )
-      .then(_ => {
-        console.log('Completed changed');
-      })
       .catch(_ => console.log('Something whent wrong'));
   }
 
   updateImportant() {
     if (this.counter.value !== this.task.important) {
       this.counter.changeValue(this.task.id);
-    } else {
-      console.log('робе');
     }
   }
 

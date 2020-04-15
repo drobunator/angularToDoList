@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
-import {ApiService} from '../services/api.service';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {ApiService, UserData} from '../services/api.service';
 
 @Component({
   selector: 'app-burger-menu',
@@ -9,18 +8,15 @@ import {BehaviorSubject, Observable} from 'rxjs';
   styleUrls: ['./burger-menu.component.scss']
 })
 export class BurgerMenuComponent implements OnInit {
-
-  lastName = '';
-  firstName = '';
-  email = '';
+  userInfo: any;
 
   constructor(private auth: AuthService, private api: ApiService) {
   }
 
   ngOnInit(): void {
     this.api.getUserData(this.auth.currentUser.uid).subscribe(data => {
-      const user = data.payload.data();
-      console.log(user);
+      this.userInfo = data.payload.data();
+      console.log(data.payload.data());
     });
   }
 }

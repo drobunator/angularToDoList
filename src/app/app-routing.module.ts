@@ -9,7 +9,8 @@ import {LoginAuthGuard} from './login-auth.guard';
 const routes: Routes = [
   {path: '', component: MainPageComponent, canActivate: [AuthGuardGuard]},
   {path: 'register', component: RegisterComponent, canActivate: [LoginAuthGuard]},
-  {path: 'login', component: LoginComponent, canActivate: [LoginAuthGuard]}
+  {path: 'login', component: LoginComponent, canActivate: [LoginAuthGuard]},
+  {path: '**', redirectTo: '/'}
 ];
 
 @NgModule({
