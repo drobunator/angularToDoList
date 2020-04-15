@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ConfirmService} from '../services/confirm.service';
 import {DataService} from '../services/data.service';
-import {Subscriber} from 'rxjs';
 import {Task} from '../services/api.service';
 
 
@@ -16,7 +15,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   sortValue = 'max';
   sortKey = 'date';
   tasks: Task[] = [];
-  loading = false;
+  loading = true;
   emptyTitle = 'todo list is empty';
   sub: any;
 
@@ -27,11 +26,11 @@ export class MainPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-   this.loading = true;
    this.sub = this.data.tasks
       .subscribe(resp => {
         this.tasks = resp;
         this.loading = false;
+        setTimeout(() => this.loading = false, 2000);
       });
   }
 

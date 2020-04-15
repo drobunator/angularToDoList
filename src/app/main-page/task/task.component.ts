@@ -45,8 +45,7 @@ export class TaskComponent implements OnInit {
     this.api.update(
       this.task.id,
       {text: this.editFormValue}
-    )
-      .catch(err => console.log(err))
+    ).catch(_ => console.log('Something went wrong'))
     this.taskEditActive = false;
   }
 
@@ -62,12 +61,12 @@ export class TaskComponent implements OnInit {
       this.task.id,
       {completed: event.target.checked}
     )
-      .catch(_ => console.log('Something whent wrong'));
+      .catch(_ => console.log('Something went wrong'));
   }
 
   updateImportant() {
     if (this.counter.value !== this.task.important) {
-      this.counter.changeValue(this.task.id);
+      this.counter.changeValue(this.task.id)
     }
   }
 

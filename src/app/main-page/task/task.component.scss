@@ -149,17 +149,21 @@
       &_send{
         position: absolute;
         bottom: -30px;
-        left: 2px;
-        width: 40px;
-        padding: 1px;
-        height: auto;
+        left: 12px;
+        width: 18px;
+        height: 18px;
+        background: url(../../../assets/img/succes.png) no-repeat;
+        background-size: cover;
+        border-radius: 50%;
+
         &:hover{
-          background: #26d130;
           transition: background linear .3s;
+          transform: scale(1.1);
+          z-index: -10;
         }
       }
     }
-
+    
     .btn-important_close {
       width: 17px;
       height: 17px;

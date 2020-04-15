@@ -24,6 +24,7 @@ export class BurgerMenuComponent implements OnInit, OnDestroy {
     this.auth.logout().then(_ => {
     });
   }
+
   ngOnDestroy(): void {
     this.sub.unsubscribe();
   }

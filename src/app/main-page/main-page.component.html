@@ -1,28 +1,29 @@
-<div class="" *ngIf="loading"> Jxrj ,f,eyf</div>
-<app-modal-confirm
-  *ngIf="confirm.activeConfirm"
-></app-modal-confirm>
-<app-modal-alert
-  *ngIf="modalAlertClose"
-  (onCloseAlert)="modalAlertClose = $event"
-></app-modal-alert>
-<app-header
-  (onSearchInput)="searchInputValue = $event"
->
-</app-header>
-<app-buttons-block
-  (onSortBtn)="sortValue = $event.value; sortKey = $event.key"
-></app-buttons-block>
+<div class="container">
+  <div class="container__todo">
+    <app-modal-confirm
+      *ngIf="confirm.activeConfirm"
+    ></app-modal-confirm>
+    <app-modal-alert
+      *ngIf="modalAlertClose"
+      (onCloseAlert)="modalAlertClose = $event"
+    ></app-modal-alert>
+    <app-header
+      (onSearchInput)="searchInputValue = $event"
+    >
+    </app-header>
+    <app-buttons-block
+      (onSortBtn)="sortValue = $event.value; sortKey = $event.key"
+    ></app-buttons-block>
 
-<div class="task-container">
-  <ul class="task-container__list">
-    <app-task
-      *ngFor="let task of tasks | searchPipe: searchInputValue | sort: [sortValue, sortKey]; let index = index "
-      [index]="index"
-      [task]="task"></app-task>
-    <div *ngIf="!tasks.length">
-      <li class="task-container_empty">{{emptyTitle | titlecase}}</li>
+    <div class="task-container">
+
+      <ul class="task-container__list">
+        <app-task
+          *ngFor="let task of tasks | searchPipe: searchInputValue | sort: [sortValue, sortKey]; let index = index "
+          [index]="index"
+          [task]="task"></app-task>
+          <li *ngIf="!tasks.length" class="task-container_empty">{{emptyTitle | titlecase}}</li>
+      </ul>
     </div>
-  </ul>
-
+  </div>
 </div>
