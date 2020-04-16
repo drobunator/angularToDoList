@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {PopupModalService} from './services/popup-modal.service';
+import { Component, OnInit } from '@angular/core';
+import { PopupModalService } from './services/popup-modal.service';
 
 @Component({
   selector: 'app-root',
@@ -7,15 +7,9 @@ import {PopupModalService} from './services/popup-modal.service';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-  constructor(
-    public popup: PopupModalService
-  ) {
-  }
+  constructor(public popup: PopupModalService) {}
 
 
-  ngOnInit(): void {
-
-  }
 }

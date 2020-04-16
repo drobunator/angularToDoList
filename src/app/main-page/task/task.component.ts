@@ -4,12 +4,23 @@ import {ApiService} from '../../services/api.service';
 import {ConfirmService} from '../../services/confirm.service';
 import {CounterService} from '../../services/counter.service';
 
+enum ImportantState {
+  none = 0,
+  task_one = 1,
+  task_two = 2,
+  task_three = 3,
+  task_four = 4,
+  task_fife = 5,
+}
+
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
   providers: [CounterService]
 })
+
+
 export class TaskComponent implements OnInit {
   @Input() task: Task;
   @Input() index: number;
@@ -20,6 +31,7 @@ export class TaskComponent implements OnInit {
   counterActive = false;
   checkboxValue: boolean;
   check: boolean;
+  importantState = ImportantState;
 
   constructor(
     private api: ApiService,
@@ -45,7 +57,7 @@ export class TaskComponent implements OnInit {
     this.api.update(
       this.task.id,
       {text: this.editFormValue}
-    ).catch(_ => console.log('Something went wrong'))
+    ).catch(_ => console.log('Something went wrong'));
     this.taskEditActive = false;
   }
 
@@ -53,7 +65,6 @@ export class TaskComponent implements OnInit {
     this.taskEditActive = false;
     this.editFormValue = this.task.text;
   }
-
 
   onCheck(event) {
     this.checkboxValue = event.target.checked;
@@ -66,7 +77,7 @@ export class TaskComponent implements OnInit {
 
   updateImportant() {
     if (this.counter.value !== this.task.important) {
-      this.counter.changeValue(this.task.id)
+      this.counter.changeValue(this.task.id);
     }
   }
 
