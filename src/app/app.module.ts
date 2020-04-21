@@ -6,13 +6,9 @@ import {ButtonsBlockComponent} from './main-page/buttons-block/buttons-block.com
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TaskComponent} from './main-page/task/task.component';
 import {ModalConfirmComponent} from './main-page/modal-confirm/modal-confirm.component';
-import {ModalAlertComponent} from './main-page/modal-alert/modal-alert.component';
 import {SearchPipePipe} from './main-page/pipes/search-pipe.pipe';
 import {SortPipe} from './main-page/pipes/sort.pipe';
 import {HttpClientModule} from '@angular/common/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
@@ -33,7 +29,6 @@ import { BurgerMenuComponent } from './burger-menu/burger-menu.component';
     ButtonsBlockComponent,
     TaskComponent,
     ModalConfirmComponent,
-    ModalAlertComponent,
     SearchPipePipe,
     SortPipe,
     MainPageComponent,
@@ -43,9 +38,6 @@ import { BurgerMenuComponent } from './burger-menu/burger-menu.component';
         BrowserModule,
         HttpClientModule,
         FormsModule,
-        BrowserAnimationsModule,
-        MatProgressBarModule,
-        MatProgressSpinnerModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireDatabaseModule,
         AngularFirestoreModule,

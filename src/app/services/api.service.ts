@@ -34,7 +34,7 @@ export class ApiService {
   }
 
   getUserData(id) {
-    return this.http.collection<UserData []>(`users/`).doc(id).snapshotChanges();
+    return this.http.collection<UserData>(`users/`).doc(id).snapshotChanges();
   }
 
   post(task: object) {

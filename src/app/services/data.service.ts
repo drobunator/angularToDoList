@@ -1,5 +1,4 @@
-import {Injectable, OnInit} from '@angular/core';
-import {map} from 'rxjs/operators';
+import {Injectable} from '@angular/core';
 import {ApiService} from './api.service';
 import {BehaviorSubject} from 'rxjs';
 import {AuthService} from './auth.service';
@@ -42,8 +41,6 @@ export class DataService {
         this.stream$.next(this.items);
       });
   }
-
-
 
 
 }

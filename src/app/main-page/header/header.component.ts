@@ -1,7 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import {AuthService} from '../../services/auth.service';
-import {DataService} from '../../services/data.service';
 import {CounterService} from '../../services/counter.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
@@ -33,7 +32,6 @@ export class HeaderComponent implements OnInit {
   constructor(
     public api: ApiService,
     public auth: AuthService,
-    public data: DataService,
     public counter: CounterService
   ) {
     this.counter.setValue = 0;
@@ -62,7 +60,7 @@ export class HeaderComponent implements OnInit {
       this.api.post(task);
       this.counter.setValue = 0;
       this.form.reset();
-    } else{
+    } else {
       this.valid = true;
     }
   }

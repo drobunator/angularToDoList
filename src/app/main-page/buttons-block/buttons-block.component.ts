@@ -16,12 +16,13 @@ export class ButtonsBlockComponent implements OnInit {
 
   ngOnInit() {
   }
-  onSortBtnsClick(key){
+
+  onSortBtnsClick(key) {
     if (this.sortBtnsFlag === false) {
-      this.onSortBtn.emit({value: 'min', key: key});
+      this.onSortBtn.emit({value: 'min', key});
       this.sortBtnsFlag = true;
     } else {
-      this.onSortBtn.emit({value: 'max', key: key});
+      this.onSortBtn.emit({value: 'max', key});
       this.sortBtnsFlag = false;
     }
   }

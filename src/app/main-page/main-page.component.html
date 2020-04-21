@@ -3,10 +3,6 @@
     <app-modal-confirm
       *ngIf="confirm.activeConfirm"
     ></app-modal-confirm>
-    <app-modal-alert
-      *ngIf="modalAlertClose"
-      (onCloseAlert)="modalAlertClose = $event"
-    ></app-modal-alert>
     <app-header
       (onSearchInput)="searchInputValue = $event"
     >
